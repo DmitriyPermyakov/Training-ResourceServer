@@ -7,7 +7,7 @@
         public string? Street { get; set; }
         public string? City { get; set; }
         public string? Building { get; set; }
-        public int SupplierId { get; set; }
+        public int SupplierId { get; set; }         
 
     }
 }

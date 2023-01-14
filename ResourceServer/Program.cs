@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ResourceServer;
+using ResourceServer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<ISupplierRepo, SupplierRepo>();
 
 string connectionString = builder.Configuration.GetConnectionString("ResourceDatabase");
 builder.Services.AddDbContext<ApplicationContext>(b =>
@@ -26,9 +29,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthorization();
-
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+//app.MapControllers();
 
 app.Run();

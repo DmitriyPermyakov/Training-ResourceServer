@@ -1,4 +1,5 @@
-﻿using ResourceServer.Models;
+﻿using ResourceServer.DTO.Requests;
+using ResourceServer.Models;
 
 namespace ResourceServer.Repositories
 {
@@ -6,9 +7,9 @@ namespace ResourceServer.Repositories
     {
         public Task<Supplier> GetByIdAsync(int id);
         public Task<List<Supplier>> GetAllAsync();
-        public Task CreateAsync(Supplier supplier);
-        public Task UpdateAsync(Supplier supplier);
-        public Task DeleteAsync(Supplier supplier);
+        public Task<int> CreateAsync(CreateSupplierRequest supplierRequest);
+        public Task UpdateAsync(UpdateSupplierRequest updateSupplierRequest);
+        public Task DeleteAsync(int id);
 
     }
 }
