@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ResourceServer.DTO.Requests;
+using ResourceServer.DTO.Responses;
+using ResourceServer.Models;
 using ResourceServer.Repositories;
 
 namespace ResourceServer.Controllers
@@ -51,8 +53,8 @@ namespace ResourceServer.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(supplierRequest);
 
-                var createdSupplierId = await repo.CreateAsync(supplierRequest);                
-                return Ok(createdSupplierId);                
+                SupplierResponse supplier = await repo.CreateAsync(supplierRequest);                
+                return Ok(supplier);                
             }
             catch(ArgumentNullException ex)
             {

@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<ISupplierRepo, SupplierRepo>();
+builder.Services.AddTransient<IProductRepo, ProductRepo>();
 
 string connectionString = builder.Configuration.GetConnectionString("ResourceDatabase");
 builder.Services.AddDbContext<ApplicationContext>(b =>

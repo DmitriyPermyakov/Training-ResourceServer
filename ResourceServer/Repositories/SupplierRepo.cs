@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ResourceServer.DTO.Requests;
+using ResourceServer.DTO.Responses;
 using ResourceServer.Models;
 
 namespace ResourceServer.Repositories
@@ -11,7 +12,7 @@ namespace ResourceServer.Repositories
         {
             this.context = context;
         }
-        public async Task<int> CreateAsync(CreateSupplierRequest supplierRequest)
+        public async Task<SupplierResponse> CreateAsync(CreateSupplierRequest supplierRequest)
         {
             if(supplierRequest == null)
             {
@@ -34,7 +35,19 @@ namespace ResourceServer.Repositories
             context.Suppliers.Add(supplier);            
             await context.SaveChangesAsync();
 
-            return supplier.Id;
+            SupplierResponse response = new SupplierResponse()
+            {
+                Id = supplier.Id,
+                Name = supplier.Name,
+                Address = new SupplierAddress()
+                {
+                    City = supplierRequest.City,
+                    Street = supplierRequest.Street,
+                    Building = supplierRequest.Building,
+                }
+            };
+
+            return response;
         }
 
         public async Task DeleteAsync(int id)
