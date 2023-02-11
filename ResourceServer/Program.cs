@@ -37,6 +37,7 @@ var tokenValidationParam = new TokenValidationParameters()
     ValidateIssuerSigningKey = true,
     RequireExpirationTime = false,
     ValidateLifetime = false,
+    RoleClaimType = "Role",
     
     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.AccessTokenSecret))
 };

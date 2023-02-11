@@ -7,9 +7,9 @@ using ResourceServer.Repositories;
 
 namespace ResourceServer.Controllers
 {
-    [Authorize(Roles = "Admin")]   
     [Route("api/[controller]")]
     [ApiController]
+       
     public class ProductController : ControllerBase
     {
         private readonly IProductRepo repo;
@@ -17,6 +17,7 @@ namespace ResourceServer.Controllers
         {
             this.repo = repo;
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost("create")]
         public async Task<IActionResult> CreateAsync(CreateProductRequest productRequest)
         {
@@ -39,7 +40,7 @@ namespace ResourceServer.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("remove/{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
@@ -75,7 +76,7 @@ namespace ResourceServer.Controllers
             List<Product> products = await repo.GetAllAsync();
             return Ok(products);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateAsync(UpdateProductRequest product)
         {

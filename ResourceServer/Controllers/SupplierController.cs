@@ -8,9 +8,9 @@ using ResourceServer.Repositories;
 
 namespace ResourceServer.Controllers
 {
-    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class SupplierController : ControllerBase
     {
         private readonly ISupplierRepo repo;
