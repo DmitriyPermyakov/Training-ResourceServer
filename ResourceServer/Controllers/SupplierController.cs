@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ResourceServer.DTO.Requests;
 using ResourceServer.DTO.Responses;
@@ -7,6 +8,7 @@ using ResourceServer.Repositories;
 
 namespace ResourceServer.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class SupplierController : ControllerBase

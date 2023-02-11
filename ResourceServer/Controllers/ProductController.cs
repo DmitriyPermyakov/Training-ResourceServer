@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using ResourceServer.DTO.Requests;
 using ResourceServer.Models;
 using ResourceServer.Repositories;
 
 namespace ResourceServer.Controllers
 {
+    [Authorize(Roles = "Admin")]   
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -51,7 +53,7 @@ namespace ResourceServer.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [Authorize(Roles  = "User")]
         [HttpGet("getById/{id}")]
         public async Task<IActionResult> GetById (int id)
         {
@@ -66,6 +68,7 @@ namespace ResourceServer.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllAsync()
         {

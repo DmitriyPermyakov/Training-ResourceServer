@@ -35,6 +35,7 @@ namespace ResourceServer.Repositories
             Product product = await context.Products.FirstAsync(x => x.Id == id);
 
             context.Products.Remove(product);
+            await context.SaveChangesAsync();
         }
 
         public async Task<List<Product>> GetAllAsync()
